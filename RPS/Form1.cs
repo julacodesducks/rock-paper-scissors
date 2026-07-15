@@ -1,10 +1,71 @@
+using System.Media;
+
 namespace RPS
 {
-    public partial class Form1 : Form
+    public partial class Game : Form
     {
-        public Form1()
+        private string playerChoice = "";
+        private int playerLives = 3;
+        private int score = 0;
+
+        private string AIMove()
+        {
+            Random rand = new Random();
+            int choice = rand.Next(1, 4);
+            switch (choice)
+            {
+                case 1:
+                    return "Rock";
+                case 2:
+                    return "Paper";
+                case 3:
+                    return "Scissors";
+            }
+            return "Rock"; //default
+        }
+
+        private void setChoice(string choice) //game logic
+        {
+            string win = "";
+            playerChoice = choice.ToLower();
+            string aiChoice = AIMove().ToLower();
+            if (playerChoice == aiChoice)
+            {
+                win = "Draw!";
+            }
+            else if ((playerChoice == "rock" && aiChoice == "scissors") ||
+                     (playerChoice == "paper" && aiChoice == "rock") ||
+                     (playerChoice == "scissors" && aiChoice == "paper"))
+            {
+                win = "You Win!";
+                score++;
+            }
+            else
+            {
+                win = "You Lose!";
+                playerLives--;
+            }
+
+        }
+
+        public Game()
         {
             InitializeComponent();
+
+        }
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            setChoice("Rock");
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            setChoice("Paper");
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            setChoice("Scissors");
         }
     }
 }
