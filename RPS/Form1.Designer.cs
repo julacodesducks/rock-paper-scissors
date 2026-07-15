@@ -28,23 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Title = new Label();
+            resultLabel = new Label();
             Rock = new PictureBox();
             Paper = new PictureBox();
             Scissors = new PictureBox();
+            scoreLabel = new Label();
+            livesLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)Rock).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Paper).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Scissors).BeginInit();
             SuspendLayout();
             // 
-            // Title
+            // resultLabel
             // 
-            Title.AutoSize = true;
-            Title.Location = new Point(375, 20);
-            Title.Name = "Title";
-            Title.Size = new Size(50, 20);
-            Title.TabIndex = 3;
-            Title.Text = "label1";
+            resultLabel.AutoSize = true;
+            resultLabel.Font = new Font("Berlin Sans FB", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            resultLabel.Location = new Point(326, 110);
+            resultLabel.Name = "resultLabel";
+            resultLabel.Size = new Size(147, 56);
+            resultLabel.TabIndex = 3;
+            resultLabel.Text = "label1";
             // 
             // Rock
             // 
@@ -77,18 +80,40 @@
             Scissors.TabIndex = 6;
             Scissors.TabStop = false;
             // 
+            // scoreLabel
+            // 
+            scoreLabel.AutoSize = true;
+            scoreLabel.Font = new Font("Berlin Sans FB", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            scoreLabel.Location = new Point(12, 9);
+            scoreLabel.Name = "scoreLabel";
+            scoreLabel.Size = new Size(80, 31);
+            scoreLabel.TabIndex = 7;
+            scoreLabel.Text = "label1";
+            // 
+            // livesLabel
+            // 
+            livesLabel.AutoSize = true;
+            livesLabel.Font = new Font("Berlin Sans FB", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            livesLabel.Location = new Point(135, 9);
+            livesLabel.Name = "livesLabel";
+            livesLabel.Size = new Size(80, 31);
+            livesLabel.TabIndex = 8;
+            livesLabel.Text = "label1";
+            // 
             // Game
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.RosyBrown;
             ClientSize = new Size(800, 450);
+            Controls.Add(livesLabel);
+            Controls.Add(scoreLabel);
             Controls.Add(Scissors);
             Controls.Add(Paper);
             Controls.Add(Rock);
-            Controls.Add(Title);
+            Controls.Add(resultLabel);
             ForeColor = SystemColors.ControlText;
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Game";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)Rock).EndInit();
@@ -99,9 +124,11 @@
         }
 
         #endregion
-        private Label Title;
+        private Label resultLabel;
         private PictureBox Rock;
         private PictureBox Paper;
         private PictureBox Scissors;
+        private Label scoreLabel;
+        private Label livesLabel;
     }
 }

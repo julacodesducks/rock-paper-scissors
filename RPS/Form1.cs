@@ -7,10 +7,10 @@ namespace RPS
         private string playerChoice = "";
         private int playerLives = 3;
         private int score = 0;
+        Random rand = new Random();
 
         private string AIMove()
         {
-            Random rand = new Random();
             int choice = rand.Next(1, 4);
             switch (choice)
             {
@@ -29,23 +29,27 @@ namespace RPS
             string win = "";
             playerChoice = choice.ToLower();
             string aiChoice = AIMove().ToLower();
-            if (playerChoice == aiChoice)
-            {
-                win = "Draw!";
-            }
-            else if ((playerChoice == "rock" && aiChoice == "scissors") ||
-                     (playerChoice == "paper" && aiChoice == "rock") ||
-                     (playerChoice == "scissors" && aiChoice == "paper"))
-            {
-                win = "You Win!";
+            if (playerLives > 0) { 
+                if (playerChoice == aiChoice)
+                {
+                    win = "Draw!";
+                }
+                else if ((playerChoice == "rock" && aiChoice == "scissors") ||
+                         (playerChoice == "paper" && aiChoice == "rock") ||
+                         (playerChoice == "scissors" && aiChoice == "paper"))
+                {
+                    win = "You Win!";
                 score++;
+                }
+                else
+                {
+                    win = "You Lose!";
+                    playerLives--;
+                }
             }
-            else
-            {
-                win = "You Lose!";
-                playerLives--;
-            }
-
+            resultLabel.Text = win;
+            scoreLabel.Text = "Score: " + score;
+            livesLabel.Text = "Lives: " + playerLives;
         }
 
         public Game()
