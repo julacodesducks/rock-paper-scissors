@@ -1,4 +1,5 @@
 using System.Media;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace RPS
 {
@@ -29,7 +30,8 @@ namespace RPS
             string win = "";
             playerChoice = choice.ToLower();
             string aiChoice = AIMove().ToLower();
-            if (playerLives > 0) { 
+            if (playerLives > 0)
+            {
                 if (playerChoice == aiChoice)
                 {
                     win = "Draw!";
@@ -39,7 +41,7 @@ namespace RPS
                          (playerChoice == "scissors" && aiChoice == "paper"))
                 {
                     win = "You Win!";
-                score++;
+                    score++;
                 }
                 else
                 {
@@ -51,10 +53,13 @@ namespace RPS
             scoreLabel.Text = "Score: " + score;
             livesLabel.Text = "Lives: " + playerLives;
 
-            await Task.Delay(2000);
+            await Task.Delay(1000);
             if (playerLives <= 0)
             {
                 resultLabel.Text = "Game Over! Score: " + score;
+                PlayAgain.Visible = true;
+                Quit.Visible = true;
+                BlockButtons();
             }
             else
             {
@@ -70,19 +75,67 @@ namespace RPS
             livesLabel.Text = "Lives: " + playerLives;
 
         }
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private async void RockButton(object sender, EventArgs e)
         {
             setChoice("Rock");
+            BlockButtons();
+            Rock.BorderStyle = BorderStyle.Fixed3D;
+            await Task.Delay(1000);
+            Rock.BorderStyle = BorderStyle.None;
+            UnblockButtons();
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private async void PaperButton(object sender, EventArgs e)
         {
             setChoice("Paper");
+            BlockButtons();
+            Paper.BorderStyle = BorderStyle.Fixed3D;
+            await Task.Delay(1000);
+            Paper.BorderStyle = BorderStyle.None;
+            UnblockButtons();
+
         }
 
-        private void pictureBox3_Click(object sender, EventArgs e)
+        private async void ScissorsButton(object sender, EventArgs e)
         {
             setChoice("Scissors");
+            BlockButtons();
+            Scissors.BorderStyle = BorderStyle.Fixed3D;
+            await Task.Delay(1000);
+            Scissors.BorderStyle = BorderStyle.None;
+            UnblockButtons();
+
+        }
+
+        private void BlockButtons()
+        {
+            Rock.Enabled = false;
+            Paper.Enabled = false;
+            Scissors.Enabled = false;
+        }
+
+        private void UnblockButtons()
+        {
+            Rock.Enabled = true;
+            Paper.Enabled = true;
+            Scissors.Enabled = true;
+        }
+
+        private void PlayAgainButton(object sender, EventArgs e)
+        {
+            score = 0;
+            playerLives = 3;
+            scoreLabel.Text = "Score: " + score;
+            livesLabel.Text = "Lives: " + playerLives;
+            resultLabel.Text = "Your move!"; 
+            PlayAgain.Visible = false;
+            Quit.Visible = false;
+            UnblockButtons();
+        }
+
+        private void QuitButton(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
