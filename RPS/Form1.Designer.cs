@@ -69,6 +69,7 @@
             Paper.SizeMode = PictureBoxSizeMode.StretchImage;
             Paper.TabIndex = 5;
             Paper.TabStop = false;
+            Paper.Click += pictureBox2_Click;
             // 
             // Scissors
             // 
@@ -79,6 +80,7 @@
             Scissors.SizeMode = PictureBoxSizeMode.StretchImage;
             Scissors.TabIndex = 6;
             Scissors.TabStop = false;
+            Scissors.Click += pictureBox3_Click;
             // 
             // scoreLabel
             // 

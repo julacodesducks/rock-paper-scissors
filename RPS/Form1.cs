@@ -24,7 +24,7 @@ namespace RPS
             return "Rock"; //default
         }
 
-        private void setChoice(string choice) //game logic
+        private async void setChoice(string choice) //game logic
         {
             string win = "";
             playerChoice = choice.ToLower();
@@ -50,11 +50,24 @@ namespace RPS
             resultLabel.Text = win;
             scoreLabel.Text = "Score: " + score;
             livesLabel.Text = "Lives: " + playerLives;
+
+            await Task.Delay(2000);
+            if (playerLives <= 0)
+            {
+                resultLabel.Text = "Game Over! Score: " + score;
+            }
+            else
+            {
+                resultLabel.Text = "Your move!";
+            }
         }
 
         public Game()
         {
             InitializeComponent();
+            resultLabel.Text = "Welcome to Rock Paper Scissors!";
+            scoreLabel.Text = "Score: " + score;
+            livesLabel.Text = "Lives: " + playerLives;
 
         }
         private void pictureBox1_Click(object sender, EventArgs e)
